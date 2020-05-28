@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vo.EventVO">
+	
+<!-- event select All -->
+   <resultMap type="eventVO" id="eventVOResultMap">
+      <result property="e_num" column="e_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_name" column="e_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_price" column="e_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_evt" column="e_evt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product1" column="e_product1" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_store" column="e_store" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product2" column="e_product2" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_img" column="e_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_registerDate" column="e_registerDate" javaType="java.util.Date" jdbcType="DATE"/>
+      <result property="e_expireDate" column="e_expireDate" javaType="java.util.Date" jdbcType="DATE"/>
+   </resultMap>
+   
+   <parameterMap type="hashmap" id="parameterSelectAllMap">
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="eventVOResultMap"/>
+   </parameterMap>
+   <select id="event_selectAll" parameterMap="parameterSelectAllMap" statementType="CALLABLE">
+      { call event_select_all_sp(?) }
+   </select>
+
+
+
+<!-- event select All store -->
+   <resultMap type="eventVO" id="eventVO_store_ResultMap">
+      <result property="e_num" column="e_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_name" column="e_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_price" column="e_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_evt" column="e_evt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product1" column="e_product1" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_store" column="e_store" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product2" column="e_product2" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_img" column="e_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_registerDate" column="e_registerDate" javaType="java.util.Date" jdbcType="DATE"/>
+      <result property="e_expireDate" column="e_expireDate" javaType="java.util.Date" jdbcType="DATE"/>
+   </resultMap>
+   
+   <parameterMap type="hashmap" id="parameterSelectAll_store_Map">
+   	  <parameter property="e_store" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="eventVO_store_ResultMap"/>
+   </parameterMap>
+   
+   <select id="event_selectAll_store" parameterMap="parameterSelectAll_store_Map" statementType="CALLABLE">
+      { call event_select_all_store_sp(?,?) }
+   </select>
+
+
+
+<!-- event select form store -->
+   <resultMap type="eventVO" id="eventVO_form_ResultMap">
+      <result property="e_num" column="e_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_name" column="e_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_price" column="e_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_evt" column="e_evt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product1" column="e_product1" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_store" column="e_store" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product2" column="e_product2" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_img" column="e_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_registerDate" column="e_registerDate" javaType="java.util.Date" jdbcType="DATE"/>
+      <result property="e_expireDate" column="e_expireDate" javaType="java.util.Date" jdbcType="DATE"/>
+   </resultMap>
+   
+   <parameterMap type="hashmap" id="parameterSelect_form_Map">
+   	  <parameter property="e_evt" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+   	  <parameter property="e_product1" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="eventVO_form_ResultMap"/>
+   </parameterMap>
+   
+   <select id="event_select_form" parameterMap="parameterSelect_form_Map" statementType="CALLABLE">
+      { call event_select_form(?,?,?) }
+   </select>
+   
+   <!-- event textbox store -->
+   <resultMap type="eventVO" id="eventVO_textbox_ResultMap">
+      <result property="e_num" column="e_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_name" column="e_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_price" column="e_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="e_evt" column="e_evt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product1" column="e_product1" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_store" column="e_store" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_product2" column="e_product2" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_img" column="e_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="e_registerDate" column="e_registerDate" javaType="java.util.Date" jdbcType="DATE"/>
+      <result property="e_expireDate" column="e_expireDate" javaType="java.util.Date" jdbcType="DATE"/>
+   </resultMap>
+   
+   <parameterMap type="hashmap" id="parameterTextbox_Map">
+   	  <parameter property="e_name" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="eventVO_textbox_ResultMap"/>
+   </parameterMap>
+   
+   <select id="event_textbox" parameterMap="parameterTextbox_Map" statementType="CALLABLE">
+      { call event_textbox(?,?) }
+   </select>
+
+
+
+
+
+
+</mapper>

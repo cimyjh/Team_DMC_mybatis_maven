@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vo.NewVO">
+
+	<!-- 메인에서 각 편의점 행사로 -->
+	<!-- 모든편의점 행사 -->
+	<resultMap type="newVO" id="newVOResultMap">
+		<result property="n_num" column="n_num"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="n_name" column="n_name"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_price" column="n_price"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="n_product1" column="n_product1"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_product2" column="n_product2"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_thumbnail" column="n_thumbnail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_img" column="n_img"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_store" column="n_store"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_detail" column="n_detail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_registerDate" column="n_registerDate"
+			javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+
+	<parameterMap type="hashmap" id="parameterSelectAllMap">
+		<parameter property="results" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="newVOResultMap" />
+	</parameterMap>
+	<select id="new_selectAll" parameterMap="parameterSelectAllMap"
+		statementType="CALLABLE">
+		{ call new_store_select_all_sp(?)}
+	</select>
+
+	<!-- 선택된 편의점 행사 -->
+	<resultMap type="newVO" id="newVO_store_ResultMap">
+		<result property="n_num" column="n_num"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="n_name" column="n_name"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_price" column="n_price"
+			javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="n_product1" column="n_product1"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_product2" column="n_product2"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_thumbnail" column="n_thumbnail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_img" column="n_img"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_store" column="n_store"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_detail" column="n_detail"
+			javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="n_registerDate" column="n_registerDate"
+			javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+	<parameterMap type="hashmap"
+		id="parameterSelectAll_store_Map">
+		<parameter property="n_store" javaType="java.lang.String"
+			mode="IN" jdbcType="VARCHAR" />
+		<parameter property="result" javaType="ResultSet" mode="OUT"
+			jdbcType="CURSOR" resultMap="newVO_store_ResultMap" />
+	</parameterMap>
+	<select id="new_selectAll_store"
+		parameterMap="parameterSelectAll_store_Map" statementType="CALLABLE">
+		{ call
+		new_store_select_sp(?,?)
+	</select>
+
+
+
+
+	
+
+		
+	<parameterMap type="hashmap" id="parameterDetail_newMap">
+		<parameter property="n_num" javaType="java.lang.Integer" mode="IN" jdbcType="INTEGER" />
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="newVOResultMap" />
+	</parameterMap>
+	
+	<select id="detail_new_select1" parameterMap="parameterDetail_newMap"
+		statementType="CALLABLE">
+		{ call detail_new_select_sp(?, ?) }
+	</select>
+
+
+
+
+	<!-- new select form store// 항목별 검색 -->
+   <resultMap type="newVO" id="newVO_form_ResultMap">
+      <result property="n_num" column="n_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="n_name" column="n_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="n_price" column="n_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <result property="n_product1" column="n_product1" javaType="java.lang.String" jdbcType="VARCHAR"/>
+       <result property="n_product2" column="n_product2" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="n_thumbnail" column="n_thumbnail" javaType="java.lang.String" jdbcType="VARCHAR"/>
+             <result property="n_img" column="n_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="n_store" column="n_store" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="n_detail" column="n_detail" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result property="n_registerDate" column="n_registerDate" javaType="java.util.Date" jdbcType="DATE"/>
+ 
+   </resultMap>
+   
+   <parameterMap type="hashmap" id="parameterSelect_form_Map">
+   	  <parameter property="n_product1" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="newVO_form_ResultMap"/>
+   </parameterMap>
+   
+   <select id="new_select_form" parameterMap="parameterSelect_form_Map" statementType="CALLABLE">
+      { call new_select_form(?,?) }
+   </select>
+
+
+
+
+
+
+
+<!-- 상품명 검색 -->
+<resultMap type="newVO" id="newVO_search_ResultMap">
+      <result property="n_num" column="n_num"
+         javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result property="n_name" column="n_name"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_price" column="n_price"
+         javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <result property="n_product1" column="n_product1"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_product2" column="n_product2"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_thumbnail" column="n_thumbnail"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_img" column="n_img"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_store" column="n_store"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_detail" column="n_detail"
+         javaType="java.lang.String" jdbcType="VARCHAR" />
+      <result property="n_registerDate" column="n_registerDate"
+         javaType="java.util.Date" jdbcType="DATE" />
+   </resultMap>
+ <parameterMap type="hashmap" id="parameterSearch_name_Map">
+        <parameter property="n_name" javaType="java.lang.String" mode="IN" jdbcType="VARCHAR"/>
+
+      <parameter property="results" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="newVO_search_ResultMap"/>
+   </parameterMap>
+
+ <select id="search_new_name" parameterMap="parameterSearch_name_Map" statementType="CALLABLE">
+      { call search_new_name(?,?) }
+   </select>
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vo.MemberVO">
+
+	<parameterMap type="memberVO" id="parameterInsertMap">
+		<parameter property="userid" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="nickname" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+		<parameter property="passwd" javaType="String"
+			jdbcType="VARCHAR" mode="IN" />
+
+	</parameterMap>
+	<insert id="insert" parameterType="memberVO"
+		parameterMap="parameterInsertMap" statementType="CALLABLE">
+		{ call
+		member_insert_sp(?,?,?)}
+	</insert>
+
+
+
+
+
+	<resultMap type="newVO" id="memberVO_loginResultMap">
+		<result property="userid" column="userid" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="passwd" column="passwd" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="nickname" column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<parameterMap type="memberVO" id="parameterMember_login_Map">
+		<parameter property="userid" javaType="String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="passwd" javaType="String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="result" javaType="ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="memberVO_loginResultMap" />
+	</parameterMap>
+
+	<select id="detail_new_select"
+		parameterMap="parameterMember_login_Map" statementType="CALLABLE">
+		{ call member_login_sp(?,?,?) }
+	</select>
+
+
+</mapper>

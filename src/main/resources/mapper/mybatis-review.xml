@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.voReviewVO">
+
+
+
+	<resultMap type="reviewVO" id="reviewVOResultMap">
+		<result property="r_num" column="r_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="n_num" column="n_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+		<result property="r_comment" column="r_comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="nickname" column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="r_like" column="r_like" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result property="r_date" column="r_date" javaType="java.util.Date" jdbcType="DATE" />
+	</resultMap>
+
+	<parameterMap type="hashmap" id="parameterDetail_reviewMap">
+		<parameter property="n_num" javaType="java.lang.Integer"
+			mode="IN" jdbcType="INTEGER" />
+		<parameter property="resultsReview" javaType="ResultSet"
+			jdbcType="CURSOR" mode="OUT" resultMap="reviewVOResultMap" />
+	</parameterMap>
+
+	<select id="detail_review_select"
+		parameterMap="parameterDetail_reviewMap" statementType="CALLABLE">
+		{ call detail_review_select(?, ?) }
+	</select>
+
+
+
+
+
+
+	<parameterMap type="hashmap" id="parameterInsertMap">
+		<parameter property="n_num" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN" />
+		<parameter property="r_comment" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="nickname" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="r_like" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+
+	<insert id="review_insert" parameterType="reviewVO"
+			parameterMap="parameterInsertMap" statementType="CALLABLE">
+		{ call
+		review_insert_sp(?,?,?,?)}
+	</insert>
+
+
+
+</mapper>
